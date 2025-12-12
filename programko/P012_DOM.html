@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eventy v dom</title>
+</head>
+<body>
+    <!--eventy slouzi k interakci uzivatele se strankou -->
+    <!--
+    eventy lze spoustet - 
+
+            1.html prvek
+            2. pres addEventListener
+
+    -->
+    <!--ucelem eventu je temer vzdy spustit nejakou funkci-->
+    <!--onclick-pri kliknuti mysi-->
+    <button onclick="spustit">spust me</button>
+
+    <!--eventy muzeme opakovat-->
+    <h1 onclick="spustit()">klikni na me</h1>
+
+    <!--jeden prvek html muze byt soucasti vice eventu-->
+    <!--onmouseover je prejeti kurzorem-->
+    <!--onmouseout je odjeti z prvku kurzorem-->
+
+    <img src="blublu.avif" alt="rybicka" onmouseover="zmenit()" onmouseout="vratit()" id="obrazek">
+
+    <!--ruzne eventu mohou spoustet stejnou funkci -->
+    <h2 onmouseover="spustit()">prejed me </h2>
+    <script>
+        function spustit(){
+            //tato funkce je volna tlacitkem s eventem onclick
+            document.body.style.backgroundColor="c1c1c1";
+
+        }
+        function zmenit(){
+            document.getElementById("obrazek").setAttribute("src","kytka.jpg");
+        }
+        function vratit() {
+            document.getElementById("obrazek").setAttribute("src","blublu.avif");
+        }
+
+        //pouziti addEventListener
+        //aby spravne fungovaů, musi byt napojeny na nejaky HTML prvek (body,tlacitko,div,atd.)
+        const obrazek1 = document.getElementById("obrazek");
+        obrazek1.addEventListener("click",function(){
+            alert ("kliknuti na obrazek!"); //popup okno s vystrahou
+
+        })
+        addEventListener("mouseover", function(){
+        document.body.style.backgroundColor="white";
+        });
+
+    </script>
+</body>
+</html>

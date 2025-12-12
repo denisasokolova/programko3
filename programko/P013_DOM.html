@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .barva{
+            color:rgb(87, 23, 3);
+        }
+    </style>
+</head>
+<body>
+    <!--dalsi metody pro praci s prvky HTML-->
+    <div id="hlavni">
+
+    </div>
+    <script>
+        //tvorba bloku pomoci JS
+
+        //vytvoreni bloku do promenne
+        const novyprvek = document.createElement("h1");
+        //vytvori promennou jejiz obsah generuje nadpis h1
+        novyprvek.innerHTML = "novy nadpis";
+        //prida promenne interni html textu
+        novyprvek.classList.add("barva");
+        //prida tridu k prvku
+
+        document.getElementById("hlavni").appendChild(novyprvek);
+        //prida prvek do rodice= nadrizeneho prvku
+        let nova= novyprvek.cloneNode(true);
+        // u novych browseru nelze mit dvakrat za sebou append child, musi se pouzit clone node na duplicitu
+        document.getElementById("hlavni").appendChild(nova);
+
+        //odstraneni elementu z rodice 
+        document.getElementById("hlavni").removeChild(novyprvek);
+
+
+    </script>
+</body>
+</html>

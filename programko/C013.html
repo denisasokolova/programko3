@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="nadpis">Rosambo</h1>
+    <p id="odstavec1">první odstavec</p>
+    <p id="odstavec2">druhy odstavec</p>
+    <p id="odstavec3">třetí odstavc</p>
+    <script>
+        let text1= document.getElementById("nadpis").innerText;
+        let text2= document.getElementById("odstavec2").innerText;
+        document.getElementById("odstavec2").innerText = text1;
+        document.getElementById("odstavec2").innerText = text2;
+
+        let text3 = document.getElementById("odstavec1").innerText;
+        let text4 = document.getElementById("odstavec3").innerText;
+        document.getElementById("odstavec4").innerText = text3;
+        document.getElementById("odstavec3").innerText = text4;
+        document.getElementById.style.color("#c1c1c1");
+    </script>
+</body>
+</html>

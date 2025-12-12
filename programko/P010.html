@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>selektory dom</title>
+</head>
+<body>
+    <p id="prvni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eius perferendis sunt magni et distinctio quae, totam impedit quidem. Ducimus officia iure nobis nulla velit dicta consequuntur itaque laborum nostrum!</p>
+    <p id="druhy">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat officia voluptate sint est magni, quasi consequuntur deleniti necessitatibus. Corporis, dolor? Quae cumque tempore iste! Veritatis cumque aut eius inventore sint?</p>
+    <script>
+        //selektory - slouzi k vyberu prvku html nebo vlastnosti css
+
+        //1. selektor BODY - vybira cele telo dokumentu
+        document.body.style.color = "#c1c1c1";
+        document.body.innerHTML += "<h2>tento nadpis byl pridan pomoci JS</h2>";
+
+        //2. selektor ID - vybira konkretni prvek dle jeho id
+        document.getElementById("prvni").style.color = "#d13c2e";
+        document.getElementById("druhy").innerText = "zde je novy text pomoci JS";
+
+        //3. selektor CLASS - pouziva pole/for each pr o manipulaci
+        //4. selektor TAG NAME - pracuje sevsemi prvky dle druhu -foreach
+        //5. QUERYSELCOR - najde prvni prvek dle css selektoru
+        //6. QUERYSELCORALL - najde vsechny prvky css selektoru a vrati Nodelist
+    </script>
+</body>
+</html>
