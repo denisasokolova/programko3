@@ -1,34 +1,47 @@
-// --- DATABÁZE PŘÍBĚHU: Objekt 'story' ---
-// Tento objekt drží veškerý obsah a logiku větvení hry.
-// Každý klíč (např. "start", "hallway") je unikátní scéna.
+let playerName = "";
+
+function askName() {
+    let name = prompt("Zadej své jméno");
+    if (!name) {
+        playerName = "Hráč.";
+    } else {
+        playerName = name + ".";
+    }
+}
+
+function chooseDirection() {
+    let choice = prompt("Kam půjdeš? (levo / pravo)");
+    switch (choice) {
+        case "levo":
+            showScene("hallway");
+            break;
+        case "pravo":
+            showScene("stairs");
+            break;
+        default:
+            showScene("dead_hide");
+    }
+}
+
 const story = {
     "start": {
-        // text: Co hráč uvidí na obrazovce.
-        text: "Procitáš v zamčené cele. Alarm houká. Dveře jsou pootevřené.",
-        // choices: Pole možností, které se zobrazí jako tlačítka.
+        text: "{name} Ocitáš se v zamčené cele. Alarm houká. Dveře jsou pootevřené.",
         choices: [
-            // text: Popisek tlačítka.
-            // next: Klíč scény, na kterou se přejde po kliknutí.
+            { text: "Rozhlédnout se a rozhodnout směr", next: "choose" },
             { text: "Vyběhnout na chodbu", next: "hallway" }, 
             { text: "Prohledat celu", next: "search_cell" },
             { text: "Zkusit se schovat pod postel", next: "dead_hide" }
         ]
     },
-    
-    // VĚTEV PROHRY
+    "choose": { text: "", choices: [] },
     "dead_hide": {
         text: "Schoval ses, ale stráže místnost zaplavily plynem. Nepřežil jsi.",
-        // 'next: "restart"' signalizuje, že je hra u konce a je potřeba zobrazit tlačítko "Zkusit znovu".
-        choices: [{ text: "ZEMŘEL JSI", next: "restart" }] 
+        choices: [{ text: "ZEMŘEL JSI", next: "restart" }]
     },
-    
-    // VĚTEV VÍTĚZSTVÍ
     "win": {
         text: "Gratuluji! Odletěl jsi helikoptérou do bezpečí.",
         choices: [{ text: "VYHRÁL JSI!", next: "restart" }]
     },
-    
-    // Ostatní scény pro kompletní příběh:
     "search_cell": {
         text: "V rohu jsi našel rezavý šroubovák. Může se hodit.",
         choices: [
@@ -108,73 +121,45 @@ const story = {
     }
 };
 
-// --- ODKAZY NA HTML PRVKY (DOM) ---
-// Získání odkazů na HTML elementy pomocí jejich ID
 const storyText = document.getElementById('story-text');
 const choicesElement = document.getElementById('choices-container');
 const restartBtn = document.getElementById('restart-button');
 
-/**
- * Zobrazí novou scénu na základě klíče. Je to centrální funkce hry.
- * @param {string} sceneKey - Klíč scény z objektu 'story'.
- */
 function showScene(sceneKey) {
-    const scene = story[sceneKey]; // Načtení dat (textu a voleb) pro danou scénu
-
-    // 1. Vložení textu do HTML
-    storyText.innerText = scene.text;
-    
-    // 2. Vymazání starých tlačítek a skrytí restart tlačítka
+    const scene = story[sceneKey];
+    storyText.innerText = scene.text.replace("{name}", playerName);
     choicesElement.innerHTML = '';
     restartBtn.style.display = 'none';
+    restartBtn.className = '';
 
-    // 3. KLÍČOVÝ KROK: Vyčistíme všechny staré CSS třídy pro barvu (zelená/červená)
-    restartBtn.className = ''; 
+    if (sceneKey === "choose") {
+        chooseDirection();
+        return;
+    }
 
-    // 4. Iterace přes všechny volby aktuální scény
     scene.choices.forEach(choice => {
         if (choice.next === "restart") {
-            // Logika pro zobrazení restart tlačítka
-
-            // Převedeme text na velká písmena pro spolehlivou kontrolu
             const buttonText = choice.text.toUpperCase();
-            
-            // KONTROLA VÍTĚZSTVÍ: Pokud text obsahuje "VYHRÁL" nebo "VÍTĚZSTVÍ"
             if (buttonText.includes("VYHRÁL") || buttonText.includes("VÍTĚZSTVÍ")) {
-                restartBtn.classList.add('win-button'); // Přidáme zelenou třídu
-            } 
-            // KONTROLA PROHRY: Pokud text obsahuje "ZEMŘEL" nebo "SMRT"
-            else if (buttonText.includes("ZEMŘEL") || buttonText.includes("SMRT") || buttonText.includes("PROHRA")) {
-                restartBtn.classList.add('lose-button'); // Přidáme červenou třídu
-            } 
-            // Jinak použijeme červenou jako default
-            else {
-                 restartBtn.classList.add('lose-button');
+                restartBtn.classList.add('win-button');
+            } else {
+                restartBtn.classList.add('lose-button');
             }
-            
             restartBtn.style.display = 'block';
-            restartBtn.innerText = choice.text; 
+            restartBtn.innerText = choice.text;
         } else {
-            // Vytvoření nového HTML elementu <button>
             const btn = document.createElement('button');
             btn.innerText = choice.text;
             btn.className = 'choice-button';
-            
-            // Nastavení události: při kliknutí zavolej showScene s klíčem další scény (choice.next)
-            btn.onclick = () => showScene(choice.next); 
-            
-            // Přidání tlačítka do kontejneru na stránce
+            btn.onclick = () => showScene(choice.next);
             choicesElement.appendChild(btn);
         }
     });
 }
 
-/**
- * Funkce, která spustí hru od začátku. Volá se při startu stránky a při kliknutí na tlačítko Restart.
- */
 function startGame() {
-    showScene("start"); // Načte se první scéna
+    askName();
+    showScene("start");
 }
 
-// Spustí hru ihned po načtení skriptu prohlížečem
 startGame();
