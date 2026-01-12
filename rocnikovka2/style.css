@@ -1,5 +1,5 @@
 body {
-    background-color: #0d1117; 
+    /* Ponechte původní barvy a písmo, jen přidáme obrázek */
     color: #c9d1d9; 
     font-family: 'Courier New', Courier, monospace;
     display: flex;
@@ -7,8 +7,21 @@ body {
     align-items: center; 
     height: 100vh;
     margin: 0;
+    
+    /* --- ZDE JE MAGIE PRO POZADÍ --- */
+    background-image: url('cela.jpg'); 
+    background-color: #252a32; /* Tmavá barva jako základ */
+    background-blend-mode: multiply; /* Smíchá barvu a obrázek pro ztmavení */
+    
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    
+    /* Přidáme plynulý přechod */
+    transition: background-image 1s ease-in-out; 
 }
 
+/* Zbytek vašeho CSS kódu je v pořádku a zůstává beze změny! */
 .game-container {
     background: #161b22;
     padding: 40px;
