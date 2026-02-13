@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>manipulacee s atriputy</title>
+</head>
+<body>
+    <h1>vysledna hodnota je: </h1>
+    <p id="cislo">11</p>
+    <img id="obrazek"src="novablublu.jpg" alt="obrazek ryby">
+    <input type="number" id="vstup" value="15"><!-- value je zatim docasne, pak se sbira pomoci eventu pri odesilani formulare -->
+
+    <script>
+
+        //1. getAttribute - ziska hodnotu atributu 
+        let ziskanahodnota = document.getElementById("obrazek").getAttribute("src");
+        console.log(ziskanahodnota);
+
+
+
+        //2. setAttribute - nastavi hodnotu atributu
+        //neni povinne ale vetsinou se pred zmenou hodnoty obsah prvku uklada do promenne
+        let obrazek = document.getElementById("obrazek"); //v promenne je ulozen cely obsah obrazku, se vsemi jeho vlastnostmi 
+        obrazek.setAttribute("src","blublu.avif"); //("atribut,hodnota atributu")
+
+
+
+        //3. removeAttribute - odstrani hodnotu atributu
+        obrazek.removeAttribute("alt");
+
+        //4. value - ziska cislenou hodnotu z html prvku - dynamicky prvek
+        let cislo = document.getElementById("cislo").value;
+        console.log(cislo);
+
+        document.getElementById("cislo").innerText = cislo;
+    </script>
+</body>
+</html>

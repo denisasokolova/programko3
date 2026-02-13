@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM- uvod</title>
+</head>
+<body>
+    <button  onclick="zmenabarvy()">zmena barvy</button>
+    <script> 
+        // DOM - zajistuje interackci mezi javascriptovm a html dokumentem
+        //HTML DOM - zkracuje cestu napric dekumentem
+
+        document.body.style.backgroundColor="#b64998";
+       // document.body.innerHTML = "<h1>ukázka DOM</h1>";
+
+        function zmenabarvy(){
+            document.body.style.backgroundColor="#2ad535";
+            document.body.innerHTML = "<h1>ukazla dom</h1>";
+            document.body.innerHTML += "<button onclick='vracenibarvy()'>zpet</button>";
+        }
+
+        function vracenibarvy(){
+          document.body.style.backgroundColor="#b64998";
+          document.body.innerHTML = "<button onclick='zmenabarvy()'>zmena barvy stranky </button>";
+        }
+    </script>
+</body>
+</html>

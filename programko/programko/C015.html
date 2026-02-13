@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="nadpis" onclick="spustit()">nadpis</h1>
+    <p id="odstavec1">odstavec pro 1. ostavec</p>
+    <p is="odstavec2">odstavec pro 2. odstavec</p>
+    <script>
+        function spustit(){
+           document.getElementById("nadpis").style.color="red";
+
+        let text1 = document.getElementById("odstavec1").innerText;
+        let text2 = document.getElementById("odstavec2").innerText;
+        document.getElementById("odstavec2").innerText = text1;
+        document.getElementById("odstavec1").innerText = text2;
+        }
+
+    </script>
+</body>
+</html>

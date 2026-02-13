@@ -1,0 +1,40 @@
+<!--PRO3 C013 - DOM Funkce s argumenty-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamické počítadlo</title>
+</head>
+<body>
+    <h1>Nákupní seznam</h1>
+    <p>
+        Počet nakoupených položek je: <span id="pocet">0</span>
+    </p>
+    <div>
+        <button onclick="pricist(1)">+1</button>
+        <button onclick="pricist(3)">+3</button>
+        <button onclick="pricist(5)">+5</button>
+    </div>
+    <div>
+        <button onclick="odecist(1)">-1</button>
+        <button onclick="odecist(3)">-3</button>
+        <button onclick="odecist(5)">-5</button>
+    </div>
+
+    <script>
+        function pricist(hodnota){
+            let cislo = document.getElementById("pocet").innerText; // puvodni hodnota + hodnota
+            cislo = Number(cislo);
+            cislo += hodnota; //cislo + hodnota
+            document.getElementById("pocet").innerText = cislo;
+        }
+        function odecist(hodnota){
+           let cislo = document.getElementById("pocet").innerText; // puvodni hodnota + hodnota
+            cislo = Number(cislo);
+            cislo -= hodnota; //cislo + hodnota
+            document.getElementById("pocet").innerText = cislo; 
+        }
+    </script>
+</body>
+</html>
